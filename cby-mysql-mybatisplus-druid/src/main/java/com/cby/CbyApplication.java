@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CbyApplication {
 
 	public static void main(String[] args) {
+		
+		/*test*/
 		SpringApplication.run(CbyApplication.class, args);
 	}
 
