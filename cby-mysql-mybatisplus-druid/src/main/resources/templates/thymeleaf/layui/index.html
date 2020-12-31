@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>layout 后台大布局 - Layui</title>
+<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
+<script th:src="@{/layui/layui.js}"></script>
+</head>
+<body class="layui-layout-body">
+
+	<div class="layui-layout layui-layout-admin">
+	
+	<div th:include="/thymeleaf/layui/left::pagination"></div>
+		
+
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<div style="padding:20px;">
+			layui 仅仅是ui
+			公共页面的引入是thymeleaf 中进行处理
+			https://blog.csdn.net/qq_31653405/article/details/82665118
+			https://blog.csdn.net/believe__sss/article/details/79992408
+			
+			https://www.layui.com/demo/admin.html
+			
+			<h1 th:text="${title}">title</h1>
+			<p th:text="${description}">description</p>
+			<p th:text="${code}"></p>
+			</div>
+			<table class="layui-hide" id="test"></table>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+		</div>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			© layui.com - 底部固定区域
+		</div>
+	</div>
+
+	<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#test'
+    ,url:'/message/listforlayui/'
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+    ,cols:[
+    [
+    {field:'id', width:80, title: 'ID', sort: true}
+      ,{field:'message', width:80, title: '用户名'}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]]
+    ,page: true
+  });
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.prompt({
+        formType: 2
+        ,value: data.email
+      }, function(value, index){
+        obj.update({
+          email: value
+        });
+        layer.close(index);
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
