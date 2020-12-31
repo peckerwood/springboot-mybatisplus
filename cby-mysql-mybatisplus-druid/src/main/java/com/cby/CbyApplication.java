@@ -8,6 +8,7 @@ public class CbyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CbyApplication.class, args);
+		/*github中编程测试*/
 	}
 
 }
