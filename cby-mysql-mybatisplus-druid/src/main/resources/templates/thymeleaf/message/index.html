@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/css/style.css"/>
+<title>Message</title>
+
+</head>
+<body>
+	<h1 th:text="${title}">title</h1>
+	<p th:text="${description}">description</p>
+
+	<p th:text="${code}"></p>
+	<p>
+		当前页面<span th:text="${data.current}">m</span> 每个页面显示:<span
+			th:text="${data.size}"></span> 共有页面:<span th:text="${data.pages}"></span>共有数据:<span
+			th:text="${data.total}">n</span>条
+	</p>
+	<div>
+	<table>
+
+  <tbody>
+    <tr th:each="item: ${data.records}">
+      <td th:text="${item.id}">id 1</td>
+      <td th:text="${item.message}">message 1</td>
+    </tr>
+  </tbody>
+</table>
+<!-- 	<div class="pager">
+		<span th:each="page:${#numbers.sequence(1,data.pages)}"><a th:href="@{'/message/index/'+${page}}"><span th:text="${page}"></span></a></span>
+	</div> -->
+	
+	<div class="pager">
+	
+	<span th:each="page2: ${pager}">
+	
+	<a th:href="@{'/message/index/'+${page2}}"><span th:text="${page2}"></span></a></span></div>
+	</div>
+
+</body>
+</html>
